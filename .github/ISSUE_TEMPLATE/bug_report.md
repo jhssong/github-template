@@ -10,22 +10,24 @@ assignees: ''
 ### Description
 > 어떠한 이슈인지 설명해주세요
 
-
+<br><br>
 
 ### Reproducing
 > 오류가 발생하는 과정을 적어주세요
 
-
+<br><br>
 
 ### Screenshots (Optional)
 > 버그 발생 화면을 스크린샷으로 보여주세요
 
-
+<br><br>
 
 ### Files
 > 관련된 파일 목록들을 작성해주세요
 
-
+<br><br>
 
 ### Additional context(Optional)
 > 추가적으로 남길 코멘트를 적어주세요
+
+<br><br>
