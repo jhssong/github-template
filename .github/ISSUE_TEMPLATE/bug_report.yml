@@ -1,5 +1,5 @@
 name: Bug Report
-description: Create a report to help us improve.
+description: Report a bug to help us fix issues and improve the project.
 title: "[Bug]: "
 labels: ["🐞 BugFix"]
 projects: ["jhssong/7"]
@@ -12,7 +12,7 @@ body:
   - type: textarea
     attributes:
       label: Current Behavior
-      description: A concise description of what you're experiencing.
+      description: Describe what is happening, including any error messages or unexpected behavior.
       placeholder: Tell us what you see!
     validations:
       required: true
@@ -20,7 +20,7 @@ body:
   - type: textarea
     attributes:
       label: Expected Behavior
-      description: A concise description of what you expected to happen.
+      description: Describe what you expected to happen instead.
       placeholder: Tell us what you expected!
     validations:
       required: true
@@ -28,7 +28,7 @@ body:
   - type: textarea
     attributes:
       label: Steps To Reproduce
-      description: Steps to reproduce the behavior.
+      description: Provide a step-by-step guide to reproduce the issue.
       placeholder: |
         1. In this environment...
         1. With this config...
@@ -53,3 +53,14 @@ body:
         Links? References? Anything that will give us more context about the issue you are encountering!
     validations:
       required: false
+
+  - type: checkboxes
+    id: issue-confirmation
+    attributes:
+      label: Issue Submission Checklist
+      description: Before submitting, please confirm that the issue template is properly completed.
+      options:
+        - label: I have assigned this issue to myself or the appropriate person.
+          required: true
+        - label: I have added the appropriate labels for this issue.
+          required: true
