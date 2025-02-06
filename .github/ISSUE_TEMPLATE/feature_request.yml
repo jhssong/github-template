@@ -16,9 +16,9 @@ body:
       description: Describe the feature in detail. What problem does it solve? How will it improve the project?
       placeholder: Explain the feature clearly.
       value: |
-        - [ ] TODO 1: ...
-        - [ ] TODO 2: ...
-        - [ ] TODO 3: ...
+        - Description 1
+        - Description 2
+        - Description 3
     validations:
       required: true
 
@@ -26,10 +26,10 @@ body:
     attributes:
       label: Implementation Steps (TODO)
       description: Outline the steps required to implement this feature.
-      placeholder: |
-        - [ ] Step 1: ...
-        - [ ] Step 2: ...
-        - [ ] Step 3: ...
+      value: |
+        - [ ] TODO 1
+        - [ ] TODO 2
+        - [ ] TODO 3
     validations:
       required: false
 
