@@ -11,6 +11,7 @@ body:
         Please provide as much detail as possible to help us understand your suggestion.
 
   - type: textarea
+    id: description
     attributes:
       label: Feature Description
       description: Describe the feature in detail. What problem does it solve? How will it improve the project?
@@ -23,6 +24,7 @@ body:
       required: true
 
   - type: textarea
+    id: todos
     attributes:
       label: Implementation Steps (TODO)
       description: Outline the steps required to implement this feature.
@@ -34,6 +36,7 @@ body:
       required: true
 
   - type: textarea
+    id: additional-context
     attributes:
       label: Additional Context & References
       description: Provide any additional information, links, or references related to this feature request.
