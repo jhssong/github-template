@@ -1,6 +1,6 @@
 import axios from "axios";
 import readline from "readline";
-import labels from "./labels.js"; // Import labels from labels.js
+import labels from "../../labels.js"; // Import labels from labels.js
 
 // Create a readline interface for user input
 const rl = readline.createInterface({

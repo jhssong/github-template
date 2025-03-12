@@ -1,0 +1,78 @@
+name: 버그 리포트
+description: 프로젝트의 문제를 신고하여 버그를 수정하고 개선하는 데 도움을 주세요.
+title: "[버그]: "
+labels: ["🐞 버그 수정"]
+projects: ["jhssong/7"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        버그 리포트를 작성해 주셔서 감사합니다!
+
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: 현재 동작
+      description: 발생한 문제를 설명하고, 오류 메시지 또는 예상치 못한 동작을 포함해 주세요.
+      placeholder: 현재 상황을 설명해 주세요!
+      value: |
+        - 설명 1
+        - 설명 2
+        - 설명 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 예상 동작
+      description: 기대했던 동작을 설명해 주세요.
+      placeholder: 기대했던 결과를 알려 주세요!
+      value: |
+        - 설명 1
+        - 설명 2
+        - 설명 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 재현 방법
+      description: 문제를 재현할 수 있는 단계를 상세히 설명해 주세요.
+      placeholder: |
+        1. 이 환경에서...
+        2. 이 설정으로...
+        3. '...' 명령 실행...
+        4. 오류 발생...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 관련 로그 출력
+      description: 관련된 로그 출력을 복사하여 붙여넣어 주세요. 자동으로 코드 형식으로 표시됩니다.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 추가 정보
+      description: |
+        관련 링크나 참고할 수 있는 내용이 있다면 추가해 주세요.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: issue-confirmation
+    attributes:
+      label: 이슈 제출 체크리스트
+      description: 제출 전에 아래 항목을 확인해 주세요.
+      options:
+        - label: 이 이슈를 나 자신 또는 적절한 담당자에게 할당했습니다.
+          required: true
+        - label: 이 이슈에 적절한 라벨을 추가했습니다.
+          required: true
