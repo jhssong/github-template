@@ -2,7 +2,6 @@ name: Bug Report
 description: Report a bug to help us fix issues and improve the project.
 title: "[Bug]: "
 labels: ["🐞 BugFix"]
-projects: ["jhssong/7"]
 body:
   - type: markdown
     attributes:

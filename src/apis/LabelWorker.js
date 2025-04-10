@@ -22,7 +22,6 @@ class LabelWorker {
   }
 
   async getExistingLabels() {
-    console.log(`Fetch existing labels from ${this.targetRepo}`);
     try {
       const res = await this.api.get(`/repos/${this.targetRepo}/labels`);
       return res.data;
@@ -36,7 +35,7 @@ class LabelWorker {
   }
 
   async deleteExistingLabels(existingLabels) {
-    console.log(`Delete ${existingLabels.length} existing labels`);
+    console.log(`✅ Deleted ${existingLabels.length} existing labels.`);
     for (const label of existingLabels) {
       try {
         await this.api.delete(
@@ -53,7 +52,7 @@ class LabelWorker {
   }
 
   async addNewLabels() {
-    console.log(`Add ${this.labels.length} new labels`);
+    console.log(`✅ Added ${this.labels.length} new labels.`);
     for (const label of this.labels) {
       const { name, color, description } = label;
       try {
@@ -77,7 +76,6 @@ class LabelWorker {
       const existingLabels = await this.getExistingLabels();
       await this.deleteExistingLabels(existingLabels);
       await this.addNewLabels();
-      console.log("✅ Add label work completed!");
     } catch (error) {
       throw createError("LabelManager", error.message, error);
     }

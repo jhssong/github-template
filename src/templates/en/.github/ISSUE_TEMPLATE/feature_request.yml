@@ -2,7 +2,6 @@ name: Feature Request
 description: Suggest a new feature, UI improvement, or documentation enhancement.
 title: "[Feat]: "
 labels: ["✨ Feature"]
-projects: ["jhssong/7"]
 body:
   - type: markdown
     attributes:
