@@ -4,7 +4,7 @@ import createError from "../utils/createError.js";
 
 const MAIN_BRANCH = "main";
 const PR_BRANCH = "docs/add-template";
-const PR_TITLE = "docs: Add github templates";
+const PR_TITLE = "docs: Add GitHub templates";
 
 const CONFIG_YML_FILE_PATH = ".github/ISSUE_TEMPLATE/config.yml";
 const FEATURE_MD_FILE_PATH = ".github/ISSUE_TEMPLATE/feature_request.md";
