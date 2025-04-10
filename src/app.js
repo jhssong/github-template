@@ -1,3 +1,4 @@
+import axios from "axios";
 import addLabels from "./apis/addLabels.js";
 import askQuestion from "./utils/askQuestion.js";
 import readline from "readline";
@@ -18,37 +19,63 @@ async function main() {
       "Enter the target repository (e.g., user/repo): "
     );
 
+    const api = axios.create({
+      baseURL: "https://api.github.com",
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+        Accept: "application/vnd.github+json",
+      },
+    });
+
     let work = 0;
-    while (work != 2) {
+    while (work != 9) {
       console.log();
       console.log("===================");
       console.log("     Work List");
       console.log("===================");
       work = await askQuestion(
         rl,
-        "Enter the work number\n" + "[1] Add labels, [2] Quit\n" + ": ",
+        "Select the work\n" +
+          "[1] Add labels, [2] Add Issue template, [3] Add Bug template, [4] Add PR Template, [9] Quit\n" +
+          ": ",
         "int"
       );
+
+      if (work == 9) break;
+
+      if (work != 1 && work != 2 && work != 3 && work != 4) {
+        console.log("Unknown work number please select again");
+        continue;
+      }
+
+      let lang = 0;
+      while (lang != 1 && lang != 2)
+        lang = await askQuestion(
+          rl,
+          "Select the language\n" + "[1] Ko, [2] En\n" + ": ",
+          "int"
+        );
 
       switch (work) {
         case 1:
           // Work 1: Add Labels
-          let lang = 0;
-          while (lang != 1 && lang != 2)
-            lang = await askQuestion(
-              rl,
-              "Enter the language number\n" + "[1] Ko, [2] En\n" + ": ",
-              "int"
-            );
-          await addLabels(GITHUB_TOKEN, TARGET_REPO, lang);
+          await addLabels(api, TARGET_REPO, lang);
           break;
         case 2:
-          // Work 2: Quit
+          // Work 2: Add Issue template
+          break;
+        case 3:
+          // Work 2: Add Bug template
+          break;
+        case 4:
+          // Work 2: Add PR template
           break;
         default:
-          console.log("Unknown work number please select again");
+          // Quit
           break;
       }
+
+      console.log("✅ Work completed!");
     }
   } catch (error) {
     console.error(error.message);
