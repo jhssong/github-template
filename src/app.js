@@ -1,7 +1,7 @@
 import axios from "axios";
-import addLabels from "./apis/addLabels.js";
 import askQuestion from "./utils/askQuestion.js";
 import readline from "readline";
+import LabelWorker from "./apis/LabelWorker.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -56,10 +56,11 @@ async function main() {
           "int"
         );
 
+      let worker;
       switch (work) {
         case 1:
           // Work 1: Add Labels
-          await addLabels(api, TARGET_REPO, lang);
+          worker = new LabelWorker(api, TARGET_REPO, lang);
           break;
         case 2:
           // Work 2: Add Issue template
@@ -74,8 +75,7 @@ async function main() {
           // Quit
           break;
       }
-
-      console.log("✅ Work completed!");
+      await worker.run();
     }
   } catch (error) {
     console.error(error.message);
