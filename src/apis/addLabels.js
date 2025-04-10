@@ -72,7 +72,7 @@ async function addLabels(GITHUB_TOKEN, TARGET_REPO, lang) {
       }
     }
 
-    console.log("Process completed!");
+    console.log("✅ Process completed!");
   } catch (error) {
     throw createError("addLabels", error.message, error);
   }
