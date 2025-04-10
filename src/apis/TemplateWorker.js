@@ -125,7 +125,7 @@ class TemplateWorker {
     const intro =
       this.lang === 1
         ? "이 PR은 다음과 같은 GitHub 템플릿을 추가합니다:"
-        : "This PR adds GitHub Issue and PR templates including:";
+        : "This PR adds GitHub Issues and PR template including:";
 
     const footer =
       this.lang === 1
