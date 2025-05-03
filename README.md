@@ -1,23 +1,3 @@
-# Template
-
-This repository contains Github templates and labels metadata.
-
-## Source Links
-
-- [Feature Request Template](https://github.com/jhssong/template/blob/main/.github/ISSUE_TEMPLATE/feature_request.yml)
-
-- [Bug Report Template](https://github.com/jhssong/template/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml)
-
-- [Pull Request Template](https://github.com/jhssong/template/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
-
-- [Labels](https://github.com/jhssong/template/blob/main/labels.js)
-
-## Automatically Add Labels
-
-This repository includes a Node.js script to automatically add labels to a target repository.
-
-To use it, first install `axios` and then run `node addLabel.js`. Follow the instructions in the terminal.
-
 # 🛠️ GitHub Template Manager
 
 A command-line utility that simplifies the setup of GitHub repositories by managing **issue labels**, **issue templates**, and **pull request templates** through the GitHub API.
