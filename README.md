@@ -17,8 +17,8 @@ A command-line utility that simplifies the setup of GitHub repositories by manag
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/github-template-manager.git
-cd github-template-manager
+git clone https://github.com/jhssong/github-template.git
+cd github-template
 npm install
 ```
 
