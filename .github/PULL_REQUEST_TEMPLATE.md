@@ -1,33 +1,32 @@
 ### Related Issues
 ---
-> 연관된 이슈 번호를 적어주세요 ex) #1
+> Please mention related issue numbers, e.g. Close #issue_num, Fix #issue_num
 
 <br><br>
 
 ### Description
 ---
-> 이번 PR에서 작업한 내용을 간략히 설명해주세요
+> Please briefly describe the changes made in this PR.
 
 <br><br>
 
 ### Checklist
 ---
-
-- [ ] 로컬 환경에서 테스트를 완료하였나요?
-- [ ] 불필요한 주석은 삭제하였나요?
-- [ ] 불필요한 print 함수를 삭제하였나요?
-- [ ] IDE에 뜨는 해결 가능한 문제들을 모두 해결하였나요?
-- [ ] Convention에 맞는 커밋 메세지를 사용하였나요?
-- [ ] Convention에 맞는 PR Title을 작성했나요?
+- [ ] Have you completed testing in your local environment?
+- [ ] Have you removed unnecessary comments?
+- [ ] Have you deleted any unnecessary print/debug statements?
+- [ ] Have you resolved all fixable issues reported by your IDE?
 
 <br><br>
 
 ### Screenshots (Optional)
 ---
+> If applicable, please attach relevant visuals, logs, or other supporting materials to help illustrate the changes made in this PR.
 
 <br><br>
 
 ### Additional context (Optional)
 ---
+> Please provide any additional context or information related to this PR.
 
 <br><br>
