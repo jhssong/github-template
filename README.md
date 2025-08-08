@@ -6,6 +6,7 @@ A command-line utility that simplifies the setup of GitHub repositories by manag
 
 ## ✨ Features
 
+
 - 🔖 Add or replace issue labels with localized presets (Korean & English)
 - 📄 Upload modern YAML-based GitHub Issue Templates
 - 🔃 Automatically create a new pull request to propose template changes
