@@ -1,6 +1,6 @@
 ### Related Issues
 ---
-> Please mention related issue numbers, e.g. Close #issue_num, Fix #issue_num
+> Please mention related issue numbers, e.g. Fixes, Closes, Resolves
 
 
 
