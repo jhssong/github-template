@@ -1,37 +1,24 @@
-### Related Issues
+## 🔗 Related Issues
 
----
 
-> Please specify the related issue number(s), e.g., #1
 
-<br><br>
+## 🔧 Work Done
 
-### Description
 
----
 
-> Briefly describe the changes made in this PR.
 
-<br><br>
+## 📋 Review Notes
 
-### Checklist
 
----
 
-- [ ] Have you tested it in the local environment?
-- [ ] Have you cleaned up unnecessary code? (comments, print statements, etc.)
-- [ ] Have you used commit messages following the convention?
 
-<br><br>
+## 📸 Screenshots
 
-### Screenshots (Optional)
 
----
 
-<br><br>
 
-### Additional Context (Optional)
+## ✅ Checklist
 
----
-
-<br><br>
+- [ ] Does it work correctly in the local environment?
+- [ ] Have unnecessary codes been cleaned up? (e.g., comments, print functions)
+- [ ] Does the commit message follow the convention?
