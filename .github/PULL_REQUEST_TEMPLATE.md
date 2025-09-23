@@ -1,40 +1,24 @@
-### Related Issues
----
-> Please mention related issue numbers, e.g. Fixes, Closes, Resolves
+## 🔗 Related Issues
 
 
 
-<br>
-
-### Description
----
-> Please briefly describe the changes made in this PR.
+## 🔧 Work Done
 
 
 
-<br>
 
-### Checklist
----
-- [ ] Have you completed testing in your local environment?
-- [ ] Have you removed unnecessary comments?
-- [ ] Have you deleted any unnecessary print/debug statements?
-- [ ] Have you resolved all fixable issues reported by your IDE?
-
-<br>
-
-### Screenshots (Optional)
----
-> If applicable, please attach relevant visuals, logs, or other supporting materials to help illustrate the changes made in this PR.
+## 📋 Review Notes
 
 
 
-<br>
 
-### Additional context (Optional)
----
-> Please provide any additional context or information related to this PR.
+## 📸 Screenshots
 
 
 
-<br>
+
+## ✅ Checklist
+
+- [ ] Does it work correctly in the local environment?
+- [ ] Have unnecessary codes been cleaned up? (e.g., comments, print functions)
+- [ ] Does the commit message follow the convention?

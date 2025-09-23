@@ -1,28 +1,21 @@
 name: Feature Request
 description: Suggest a new feature, UI improvement, or documentation enhancement.
-title: "[Feat]: "
 labels: ["✨ Feature"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for taking the time to submit a feature request!  
-        Please provide as much detail as possible to help us understand your suggestion.
-
   - type: textarea
     id: description
     attributes:
-      label: Feature Description
-      description: Describe the feature in detail. What problem does it solve? How will it improve the project?
-      placeholder: Explain the feature clearly.
+      label: 💡 What is the feature?
+      description: Describe the feature in detail. What problem does it solve, and what is the core goal of this feature?
+      placeholder: Describe the feature.
     validations:
       required: true
 
   - type: textarea
     id: todos
     attributes:
-      label: Implementation Steps (TODO)
-      description: Outline the steps required to implement this feature.
+      label: 🛠️ Tasks to complete
+      description: List the tasks required to implement this feature.
       placeholder: |
         - [ ] TODO 1
         - [ ] TODO 2
@@ -33,19 +26,16 @@ body:
   - type: textarea
     id: additional-context
     attributes:
-      label: Additional Context & References
-      description: Provide any additional information, links, or references related to this feature request.
-      placeholder: Include related discussions, documentation links, or any useful resources.
+      label: 📋 Additional Context
+      description: Provide any additional information, links, or resources related to this feature request.
+      placeholder: Include links to relevant discussions, documentation, or useful resources.
     validations:
       required: false
 
   - type: checkboxes
     id: feature-confirmation
     attributes:
-      label: Feature Request Checklist
-      description: Please confirm that you have properly filled out this feature request template.
+      label: ✅ Checklist
       options:
-        - label: I have assigned this issue to myself or the appropriate person.
-          required: true
-        - label: I have added the appropriate labels for this issue.
+        - label: I have added the appropriate labels to this issue.
           required: true

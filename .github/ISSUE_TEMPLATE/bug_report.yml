@@ -1,49 +1,43 @@
 name: Bug Report
-description: Report a bug to help us fix issues and improve the project.
-title: "[Bug]: "
+description: Report a bug to help us fix and improve the project.
 labels: ["🐞 BugFix"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
-
   - type: textarea
     id: current-behavior
     attributes:
-      label: Current Behavior
-      description: Describe what is happening, including any error messages or unexpected behavior.
-      placeholder: Tell us what you see!
+      label: ⚠️ Current Behavior
+      description: Describe the bug you've encountered, including any error messages or unexpected behavior.
+      placeholder: Describe the current situation.
     validations:
       required: true
 
   - type: textarea
     id: expected-behavior
     attributes:
-      label: Expected Behavior
-      description: Describe what you expected to happen instead.
-      placeholder: Tell us what you expected!
+      label: ✅ Expected Behavior
+      description: Describe what you expected to happen.
+      placeholder: Describe the expected result.
     validations:
       required: true
 
   - type: textarea
     id: reproduce
     attributes:
-      label: Steps To Reproduce
-      description: Provide a step-by-step guide to reproduce the issue.
+      label: ✍️ Steps to Reproduce
+      description: Provide detailed steps to reproduce the bug.
       placeholder: |
         1. In this environment...
-        1. With this config...
-        1. Run '...'
-        1. See error...
+        2. With these settings...
+        3. Run the '...' command...
+        4. An error occurs...
     validations:
       required: true
 
   - type: textarea
     id: logs
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      label: 💾 Relevant Logs
+      description: Copy and paste any relevant log output. It will be automatically formatted as code.
       render: shell
     validations:
       required: false
@@ -51,19 +45,16 @@ body:
   - type: textarea
     id: additional-context
     attributes:
-      label: Anything else?
+      label: 📋 Additional Context
       description: |
-        Links? References? Anything that will give us more context about the issue you are encountering!
+        Add any related links or relevant information.
     validations:
       required: false
 
   - type: checkboxes
     id: issue-confirmation
     attributes:
-      label: Issue Submission Checklist
-      description: Before submitting, please confirm that the issue template is properly completed.
+      label: ✅ Checklist
       options:
-        - label: I have assigned this issue to myself or the appropriate person.
-          required: true
-        - label: I have added the appropriate labels for this issue.
+        - label: I have added the appropriate labels to this issue.
           required: true
