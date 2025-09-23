@@ -1,48 +1,38 @@
 const labels = [
   {
-    name: "✨ Feature",
-    color: "a2eeef",
-    description: "Features and improvements",
+    name: "🐞 Bug",
+    color: "d73a4a",
+    description: "Bug reports and fixes.",
   },
   {
-    name: "🐞 BugFix",
-    color: "d73a4a",
-    description: "Bug reports and fixes",
+    name: "📃 Docs",
+    color: "0075ca",
+    description: "Documentation writing and updates.",
+  },
+  {
+    name: "✨ Feature",
+    color: "a2eeef",
+    description: "New features and improvements.",
   },
   {
     name: "🔨 Refactor",
     color: "f29a4e",
-    description: "Code refactoring (changes in functionality)",
+    description: "Code refactoring.",
   },
   {
-    name: "📃 Docs",
-    color: "1D76DB",
-    description: "Writing and editing documentation",
+    name: "🔴 High Priority",
+    color: "d73a4a",
+    description: "High priority.",
   },
   {
-    name: "⚙ Setting",
-    color: "e3dede",
-    description: "Development environment setup",
+    name: "🟡 Medium Priority",
+    color: "e4e669",
+    description: "Medium priority.",
   },
   {
-    name: "🌏 Deploy",
-    color: "C2E0C6",
-    description: "Deployment-related tasks",
-  },
-  {
-    name: "🧹 CleanUp",
-    color: "FEF2C0",
-    description: "Cleaning up and organizing the code",
-  },
-  {
-    name: "🙋‍♂️ Question",
-    color: "9ED447",
-    description: "Issues with only questions",
-  },
-  {
-    name: "✅ Test",
-    color: "ccffc4",
-    description: "Test-related tasks",
+    name: "🔵 Low Priority",
+    color: "0075ca",
+    description: "Low priority.",
   },
 ];
 
