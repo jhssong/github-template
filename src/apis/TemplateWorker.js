@@ -86,6 +86,18 @@ class TemplateWorker {
     );
   }
 
+  async fileExists(filePath, branch) {
+    try {
+      await this.api.get(
+        `/repos/${this.owner}/${this.repo}/contents/${filePath}?ref=${branch}`,
+      );
+      return true;
+    } catch (error) {
+      if (error.response?.status === 404) return false;
+      throw error;
+    }
+  }
+
   getTemplateFilesByLang(langCode) {
     const basePath = langCode === 1 ? "src/templates/ko" : "src/templates/en";
     return {
@@ -154,12 +166,14 @@ class TemplateWorker {
 
       // Delete existing GitHub Templates
       for (const filePath of this.getDeleteTargets()) {
-        treeItems.push({
-          path: filePath,
-          mode: "100644",
-          type: "blob",
-          sha: null,
-        });
+        const exists = await this.fileExists(filePath, PR_BRANCH);
+
+        if (exists) {
+          treeItems.push({
+            path: filePath,
+            sha: null,
+          });
+        }
       }
 
       // Update GitHub Templates
