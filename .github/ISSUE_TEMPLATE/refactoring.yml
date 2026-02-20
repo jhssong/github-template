@@ -1,0 +1,44 @@
+name: 🔨 Refactor
+description: Propose improvements to code structure, remove duplication, or enhance readability.
+labels: ["🔨 Refactor"]
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 🎯 Purpose
+      description: Describe the goal of this refactoring. (e.g., reducing technical debt, improving readability, restructuring code)
+      placeholder: |
+        - Improve readability
+        - Remove duplicated code
+        - Enhance testability
+    validations:
+      required: true
+
+  - type: textarea
+    id: improvement
+    attributes:
+      label: ✅ Proposed Changes
+      description: Describe how you plan to refactor the code.
+      placeholder: |
+        - Extract methods
+        - Introduce a shared module
+        - Apply a design pattern
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📋 Additional Context
+      description: Add any related links or relevant information.
+      placeholder: Include links to relevant discussions, documentation, or useful resources.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Checklist
+      options:
+        - label: I have added the appropriate labels to this issue.
+          required: true
