@@ -1,83 +1,113 @@
 import axios from "axios";
-import askQuestion from "./utils/askQuestion.js";
-import readline from "readline";
+import chalk from "chalk";
+import figlet from "figlet";
+import inquirer from "inquirer";
 import LabelWorker from "./apis/LabelWorker.js";
 import TemplateWorker from "./apis/TemplateWorker.js";
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+function printBanner() {
+  const banner = figlet.textSync("GitHub Template", {
+    horizontalLayout: "default",
+    verticalLayout: "default",
+  });
+  console.clear();
+  console.log(chalk.green(banner));
+}
 
 async function main() {
-  console.log("===================");
-  console.log("  GITHUB TEMPLATE");
-  console.log("===================");
+  printBanner();
+
   try {
-    const GITHUB_TOKEN = await askQuestion(rl, "Enter your GitHub token: ");
-    const OWNER_NAME = await askQuestion(rl, "Enter the owner name: ");
-    const REPO_NAME = await askQuestion(rl, "Enter the repository name: ");
+    const answers = await inquirer.prompt([
+      {
+        type: "password",
+        name: "token",
+        message: "Enter your GitHub token:",
+        mask: "*",
+        validate: (input) => (input ? true : "GitHub token is required."),
+      },
+      {
+        type: "input",
+        name: "owner",
+        message: "Enter the owner name:",
+        validate: (input) => (input ? true : "Owner name is required."),
+      },
+      {
+        type: "input",
+        name: "repo",
+        message: "Enter the repository name:",
+        validate: (input) => (input ? true : "Repository name is required."),
+      },
+    ]);
 
     const api = axios.create({
       baseURL: "https://api.github.com",
       headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
+        Authorization: `token ${answers.token}`,
         Accept: "application/vnd.github+json",
       },
     });
 
-    let work = 0;
-    while (1) {
-      console.log("\n\n");
-      console.log("===================");
-      console.log("     Work List");
-      console.log("===================");
-      work = await askQuestion(
-        rl,
-        "Select the work\n" +
-          "[1] Add labels, [2] Add template, [3] Quit\n" +
-          ": ",
-        "int"
-      );
+    while (true) {
+      const { work } = await inquirer.prompt([
+        {
+          type: "select",
+          name: "work",
+          message: "Select the work:",
+          choices: [
+            { name: "Add labels", value: 1 },
+            { name: "Add template", value: 2 },
+            { name: "Quit", value: 3 },
+          ],
+        },
+      ]);
 
-      if (work == 3) break;
-      if (work != 1 && work != 2) {
-        console.log("Unknown work number please select again");
-        continue;
-      }
+      if (work === 3) break;
 
-      let lang = 0;
-      while (lang != 1 && lang != 2 && lang != 3)
-        lang = await askQuestion(
-          rl,
-          "Select the language\n" + "[1] Ko, [2] En [3] Back\n" + ": ",
-          "int"
-        );
-      if (lang == 3) continue;
-      console.log();
+      const { lang } = await inquirer.prompt([
+        {
+          type: "select",
+          name: "lang",
+          message: "Select the language:",
+          choices: [
+            { name: "Korean", value: 1 },
+            { name: "English", value: 2 },
+            { name: "Back", value: 3 },
+          ],
+        },
+      ]);
+
+      if (lang === 3) continue;
 
       let worker;
+
       switch (work) {
         case 1:
-          // Work 1: Add Labels
-          worker = new LabelWorker(api, `${OWNER_NAME}/${REPO_NAME}`, lang);
+          worker = new LabelWorker(
+            api,
+            `${answers.owner}/${answers.repo}`,
+            lang,
+          );
           break;
         case 2:
-          // Work 2: Add Templates
-          worker = new TemplateWorker(api, OWNER_NAME, REPO_NAME, lang);
-          break;
-        default:
-          // Quit
+          worker = new TemplateWorker(api, answers.owner, answers.repo, lang);
           break;
       }
-      await worker.run();
+
+      console.log("\nProcessing...\n");
+
+      try {
+        await worker.run();
+        console.log("✅ Done successfully.\n");
+      } catch (err) {
+        console.error(err.message);
+      }
     }
   } catch (error) {
-    console.error(error.message);
-  } finally {
-    console.log("\nBye");
-    rl.close();
+    console.error("Unexpected error:", error.message);
   }
+
+  console.log("\nBye 👋");
 }
 
 main();

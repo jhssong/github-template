@@ -1,4 +1,5 @@
 import fs from "fs";
+import ora from "ora";
 import path from "path";
 import createError from "../utils/createError.js";
 
@@ -145,18 +146,27 @@ class TemplateWorker {
   }
 
   async run() {
+    const spinner = ora();
+
     try {
+      spinner.start("Checking branch...");
+
       const templates = this.getTemplateFilesByLang(this.lang);
 
       // Ensure branch exists
       let branchRef;
       try {
         branchRef = await this.getBranchRef(PR_BRANCH);
+        spinner.succeed("Branch found.");
       } catch {
+        spinner.text = "Creating branch...";
         const mainRef = await this.getBranchRef(MAIN_BRANCH);
         await this.createBranch(PR_BRANCH, mainRef.object.sha);
         branchRef = await this.getBranchRef(PR_BRANCH);
+        spinner.succeed("Branch created.");
       }
+
+      spinner.start("Preparing commit...");
 
       const latestCommitSha = branchRef.object.sha;
       const commitData = await this.getCommit(latestCommitSha);
@@ -164,7 +174,7 @@ class TemplateWorker {
 
       const treeItems = [];
 
-      // Delete existing GitHub Templates
+      // Delete targets safely
       for (const filePath of this.getDeleteTargets()) {
         const exists = await this.fileExists(filePath, PR_BRANCH);
 
@@ -176,7 +186,7 @@ class TemplateWorker {
         }
       }
 
-      // Update GitHub Templates
+      // Add / update templates
       for (const key of Object.keys(templates)) {
         const { filePath, localPath } = templates[key];
         const content = fs.readFileSync(path.resolve(localPath), "utf8");
@@ -200,22 +210,31 @@ class TemplateWorker {
 
       await this.updateRef(PR_BRANCH, newCommitSha);
 
-      console.log("✅ All templates committed.");
+      spinner.succeed("Templates committed.");
+
+      // Check PR
+      spinner.start("Checking existing pull request...");
 
       const res = await this.api.get(
         `/repos/${this.owner}/${this.repo}/pulls?head=${this.owner}:${PR_BRANCH}&state=open`,
       );
 
       if (res.data.length === 0) {
+        spinner.text = "Creating pull request...";
+
         await this.api.post(`/repos/${this.owner}/${this.repo}/pulls`, {
           title: PR_TITLE,
           head: PR_BRANCH,
           base: MAIN_BRANCH,
           body: this.getPRBodyByLang(),
         });
-        console.log("✅ Pull request created.");
+
+        spinner.succeed("Pull request created.");
+      } else {
+        spinner.info("Pull request already exists. Branch updated.");
       }
     } catch (error) {
+      spinner.fail("Template update failed.");
       throw createError("TemplateWorker", error.message, error);
     }
   }
