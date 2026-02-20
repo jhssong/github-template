@@ -33,7 +33,7 @@ body:
       required: false
 
   - type: checkboxes
-    id: feature-confirmation
+    id: checklist
     attributes:
       label: ✅ 체크리스트
       options:

@@ -3,7 +3,7 @@ description: 프로젝트의 문제를 신고하여 버그를 수정하고 개�
 labels: ["🐞 버그 수정"]
 body:
   - type: textarea
-    id: current-behavior
+    id: problem
     attributes:
       label: ⚠️ 문제 상황
       description: 발생한 문제를 설명하고, 오류 메시지 또는 예상치 못한 동작을 포함해 주세요.
@@ -12,7 +12,7 @@ body:
       required: true
 
   - type: textarea
-    id: expected-behavior
+    id: expected
     attributes:
       label: ✅ 예상 동작
       description: 기대했던 동작을 설명해 주세요.
@@ -47,11 +47,12 @@ body:
     attributes:
       label: 📋 참고 자료
       description: 관련 링크나 참고할 수 있는 내용이 있다면 추가해 주세요.
+      placeholder: 관련 토론, 문서 링크 또는 유용한 자료를 포함해 주세요.
     validations:
       required: false
 
   - type: checkboxes
-    id: issue-confirmation
+    id: checklist
     attributes:
       label: ✅ 체크리스트
       options:
