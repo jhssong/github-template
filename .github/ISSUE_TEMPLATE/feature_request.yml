@@ -1,21 +1,21 @@
-name: Feature Request
-description: Suggest a new feature, UI improvement, or documentation enhancement.
-labels: ["✨ Feature"]
+name: 기능 요청
+description: 새로운 기능, UI 개선 또는 문서 보강을 제안해 주세요.
+labels: ["✨ 기능"]
 body:
   - type: textarea
     id: description
     attributes:
-      label: 💡 What is the feature?
-      description: Describe the feature in detail. What problem does it solve, and what is the core goal of this feature?
-      placeholder: Describe the feature.
+      label: 💡 어떤 기능인가요?
+      description: 해당 기능을 자세히 설명해 주세요. 어떤 문제를 해결하며, 이 기능이 해결하려는 핵심 목표는 무엇인가요?
+      placeholder: 기능을 설명해 주세요.
     validations:
       required: true
 
   - type: textarea
     id: todos
     attributes:
-      label: 🛠️ Tasks to complete
-      description: List the tasks required to implement this feature.
+      label: 🛠️ 작업 내용
+      description: 이 기능을 구현하기 위해 필요한 작업을 정리해 주세요.
       placeholder: |
         - [ ] TODO 1
         - [ ] TODO 2
@@ -26,16 +26,16 @@ body:
   - type: textarea
     id: additional-context
     attributes:
-      label: 📋 Additional Context
-      description: Add any related links or relevant information.
-      placeholder: Include links to relevant discussions, documentation, or useful resources.
+      label: 📋 참고 자료
+      description: 관련 링크나 참고할 수 있는 내용이 있다면 추가해 주세요.
+      placeholder: 관련 토론, 문서 링크 또는 유용한 자료를 포함해 주세요.
     validations:
       required: false
 
   - type: checkboxes
     id: checklist
     attributes:
-      label: ✅ Checklist
+      label: ✅ 체크리스트
       options:
-        - label: I have added the appropriate labels to this issue.
+        - label: 이 이슈에 적절한 라벨을 추가했습니다.
           required: true
