@@ -1,20 +1,20 @@
-# 🛠️ GitHub Template Manager
+# GitHub Template Manager
 
-A command-line utility that simplifies the setup of GitHub repositories by managing **issue labels**, **issue templates**, and **pull request templates** through the GitHub API.
-
----
-
-## ✨ Features
-
-- 🔖 Add or replace issue labels with localized presets (Korean & English)
-- 📄 Upload modern YAML-based GitHub Issue Templates
-- 🔃 Automatically create a new pull request to propose template changes
-- 🌐 Multi-language support (Korean 🇰🇷 / English 🇺🇸)
-- 🛡️ Secure GitHub token usage via input prompt
+A command-line utility that simplifies the setup of GitHub repositories by managing **labels**, **issue templates**, and **pull request templates** through the GitHub API.
 
 ---
 
-## 📦 Installation
+## Features
+
+- Add or replace issue labels with localized presets (Korean & English)
+- Upload modern YAML-based GitHub Issue Templates
+- Automatically create a new pull request to propose template changes
+- Multi-language support (Korean / English)
+- Secure GitHub token usage via input prompt
+
+---
+
+## Installation
 
 ```bash
 git clone https://github.com/jhssong/github-template.git
@@ -22,7 +22,7 @@ cd github-template
 npm install
 ```
 
-## 🧑‍💻 Usage
+## Usage
 
 ```bash
 npm start
@@ -30,31 +30,29 @@ npm start
 
 You will be guided through prompts:
 
-1. 🔐 Enter GitHub Personal Access Token (with repo or public_repo scope)
+1. Enter GitHub Personal Access Token (with repo or public_repo scope)
 
-2. 🧑‍💼 Enter repository owner and name
+2. Enter repository owner and name
 
-3. ⚙️ Choose a task:
-
+3. Choose a task:
    - [1] Add labels
 
    - [2] Add templates
 
    - [3] Quit
 
-4. 🌍 Select a language:
-
+4. Select a language:
    - [1] Korean
 
    - [2] English
 
    - [3] Back
 
-## 🧱 Modules
+## Modules
 
-### 🏷 `LabelWorker.js`
+### LabelWorker
 
-Handles complete replacement of all issue labels in the repository.
+Handles complete replacement of all labels in the repository.
 
 **Workflow:**
 
@@ -74,46 +72,24 @@ Handles complete replacement of all issue labels in the repository.
 }
 ```
 
-## 📂 TemplateWorker.js
+## TemplateWorker.js
 
 Manages issue and pull request templates, and creates a pull request to introduce them.
+Templates are loaded from src/templates/en/ or src/templates/ko/ depending on language selection.
 
-**Features:**
+**Workflows:**
 
-- Adds:
+1. Creates docs/add-template branch if not exists
 
-  - config.yml (issue template configuration)
+2. Deletes old .md-style templates if present
 
-  - feature_request.yml
+3. Uploads YAML templates
 
-  - bug_report.yml
+4. Opens a pull request to the main branch (if not already open)
 
-  - PULL_REQUEST_TEMPLATE.md
+**Example:** [Pull Request Template](/src/templates/en/.github/PULL_REQUEST_TEMPLATE.md)
 
-- Automatically:
-
-  - Creates docs/add-template branch if not exists
-
-  - Deletes old .md-style templates if present
-
-  - Uploads YAML templates
-
-  - Opens a pull request to the main branch (if not already open)
-
-**Template File Paths:**
-
-```bash
-.github/
-  └─ ISSUE_TEMPLATE/
-        ├─ config.yml
-        ├─ feature_request.yml
-        └─ bug_report.yml
-  └─ PULL_REQUEST_TEMPLATE.md
-```
-
-> 🔍 Templates are loaded from src/templates/en/ or src/templates/ko/ depending on language selection.
-
-## 🔐 Token Scopes
+## Token Scopes
 
 To use this tool, create a GitHub personal access token with:
 
@@ -123,6 +99,6 @@ To use this tool, create a GitHub personal access token with:
 
 [Generate one here →](https://github.com/settings/tokens)
 
-## 📄 License
+## License
 
 This project is licensed under the [MIT License](/LICENSE.txt).
