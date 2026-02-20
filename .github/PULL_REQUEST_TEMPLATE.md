@@ -1,24 +1,21 @@
-## 🔗 Related Issues
+## 🔗 관련 이슈
 
 
 
-## 🔧 Work Done
+## 🔧 작업 내용
 
 
 
-
-## 📋 Review Notes
-
+## 📋 리뷰 참고사항 
 
 
 
-## 📸 Screenshots
+## 📸 스크린샷
 
 
 
+## ✅ 체크리스트
 
-## ✅ Checklist
-
-- [ ] Does it work correctly in the local environment?
-- [ ] Have unnecessary codes been cleaned up? (e.g., comments, print functions)
-- [ ] Does the commit message follow the convention?
+- [ ] 로컬 환경에서 정상적으로 동작하나요?
+- [ ] 불필요한 코드를 정리하였나요? (주석, print 함수 등)
+- [ ] 커밋 메시지가 컨벤션을 따르고 있나요?
