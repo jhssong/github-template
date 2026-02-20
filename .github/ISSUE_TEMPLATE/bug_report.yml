@@ -3,7 +3,7 @@ description: Report a bug to help us fix and improve the project.
 labels: ["🐞 BugFix"]
 body:
   - type: textarea
-    id: current-behavior
+    id: current
     attributes:
       label: ⚠️ Current Behavior
       description: Describe the bug you've encountered, including any error messages or unexpected behavior.
@@ -12,7 +12,7 @@ body:
       required: true
 
   - type: textarea
-    id: expected-behavior
+    id: expected
     attributes:
       label: ✅ Expected Behavior
       description: Describe what you expected to happen.
@@ -46,13 +46,13 @@ body:
     id: additional-context
     attributes:
       label: 📋 Additional Context
-      description: |
-        Add any related links or relevant information.
+      description: Add any related links or relevant information.
+      placeholder: Include links to relevant discussions, documentation, or useful resources.
     validations:
       required: false
 
   - type: checkboxes
-    id: issue-confirmation
+    id: checklist
     attributes:
       label: ✅ Checklist
       options:
