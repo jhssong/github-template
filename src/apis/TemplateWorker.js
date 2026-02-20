@@ -3,14 +3,17 @@ import path from "path";
 import createError from "../utils/createError.js";
 
 const MAIN_BRANCH = "main";
-const PR_BRANCH = "docs/add-template";
-const PR_TITLE = "docs: Add GitHub templates";
+const PR_BRANCH = "docs/0-update-template";
+const PR_TITLE = "docs: Update GitHub templates";
+const COMMIT_MSG = "docs: Update GitHub templates";
 
 const CONFIG_YML_FILE_PATH = ".github/ISSUE_TEMPLATE/config.yml";
 const FEATURE_MD_FILE_PATH = ".github/ISSUE_TEMPLATE/feature_request.md";
 const FEATURE_YML_FILE_PATH = ".github/ISSUE_TEMPLATE/feature_request.yml";
 const BUG_MD_FILE_PATH = ".github/ISSUE_TEMPLATE/bug_report.md";
 const BUG_YML_FILE_PATH = ".github/ISSUE_TEMPLATE/bug_report.yml";
+const REFACTORING_MD_FILE_PATH = ".github/ISSUE_TEMPLATE/refactoring.md";
+const REFACTORING_YML_FILE_PATH = ".github/ISSUE_TEMPLATE/refactoring.yml";
 const PULL_REQUEST_FILE_PATH = ".github/PULL_REQUEST_TEMPLATE.md";
 
 class TemplateWorker {
@@ -21,11 +24,11 @@ class TemplateWorker {
     this.lang = lang;
   }
 
-  async getBranchSHA(branch) {
+  async getBranchRef(branch) {
     const res = await this.api.get(
-      `/repos/${this.owner}/${this.repo}/git/ref/heads/${branch}`
+      `/repos/${this.owner}/${this.repo}/git/ref/heads/${branch}`,
     );
-    return res.data.object.sha;
+    return res.data;
   }
 
   async createBranch(newBranch, baseSha) {
@@ -35,60 +38,52 @@ class TemplateWorker {
     });
   }
 
-  async getFileSHA(filePath, branch) {
-    try {
-      const res = await this.api.get(
-        `/repos/${this.owner}/${this.repo}/contents/${filePath}?ref=${branch}`
-      );
-      return res.data.sha;
-    } catch (error) {
-      if (error.response?.status === 404) return null;
-      throw createError("TemplateWorker", "Failed to get file SHA", error);
-    }
+  async getCommit(commitSha) {
+    const res = await this.api.get(
+      `/repos/${this.owner}/${this.repo}/git/commits/${commitSha}`,
+    );
+    return res.data;
   }
 
-  async deleteFileIfExists(filePath, branch) {
-    if (filePath == null) return;
-    try {
-      const res = await this.api.get(
-        `/repos/${this.repo}/contents/${filePath}?ref=${branch}`
-      );
-
-      const sha = res.data.sha;
-
-      await this.api.delete(`/repos/${this.repo}/contents/${filePath}`, {
-        data: {
-          message: `chore: delete existing template file ${filePath}`,
-          sha,
-          branch,
-        },
-      });
-    } catch (error) {
-      if (error.response?.status === 404) return;
-      throw createError(
-        "TemplateWorker",
-        `Failed to delete existing file: ${filePath}`,
-        error
-      );
-    }
+  async createBlob(content) {
+    const res = await this.api.post(
+      `/repos/${this.owner}/${this.repo}/git/blobs`,
+      {
+        content,
+        encoding: "utf-8",
+      },
+    );
+    return res.data.sha;
   }
 
-  async uploadFile({ content, path, branch, message, sha }) {
-    await this.api.put(`/repos/${this.owner}/${this.repo}/contents/${path}`, {
-      message,
-      content: Buffer.from(content).toString("base64"),
-      branch,
-      ...(sha && { sha }),
-    });
+  async createTree(baseTreeSha, treeItems) {
+    const res = await this.api.post(
+      `/repos/${this.owner}/${this.repo}/git/trees`,
+      {
+        base_tree: baseTreeSha,
+        tree: treeItems,
+      },
+    );
+    return res.data.sha;
   }
 
-  async createPullRequest({ branch, base, title, body }) {
-    await this.api.post(`/repos/${this.owner}/${this.repo}/pulls`, {
-      title,
-      head: branch,
-      base,
-      body,
-    });
+  async createCommit(message, treeSha, parentSha) {
+    const res = await this.api.post(
+      `/repos/${this.owner}/${this.repo}/git/commits`,
+      {
+        message,
+        tree: treeSha,
+        parents: [parentSha],
+      },
+    );
+    return res.data.sha;
+  }
+
+  async updateRef(branch, newSha) {
+    await this.api.patch(
+      `/repos/${this.owner}/${this.repo}/git/refs/heads/${branch}`,
+      { sha: newSha },
+    );
   }
 
   getTemplateFilesByLang(langCode) {
@@ -96,94 +91,115 @@ class TemplateWorker {
     return {
       config: {
         filePath: CONFIG_YML_FILE_PATH,
-        deletePath: null,
         localPath: `${basePath}/${CONFIG_YML_FILE_PATH}`,
-        commitMsg: "docs: Add issue template config",
       },
       feature: {
         filePath: FEATURE_YML_FILE_PATH,
-        deletePath: FEATURE_MD_FILE_PATH,
         localPath: `${basePath}/${FEATURE_YML_FILE_PATH}`,
-        commitMsg: "docs: Add feature request template",
       },
       bug: {
         filePath: BUG_YML_FILE_PATH,
-        deletePath: BUG_MD_FILE_PATH,
         localPath: `${basePath}/${BUG_YML_FILE_PATH}`,
-        commitMsg: "docs: Add bug report template",
+      },
+      refactor: {
+        filePath: REFACTORING_YML_FILE_PATH,
+        localPath: `${basePath}/${REFACTORING_YML_FILE_PATH}`,
       },
       pr: {
         filePath: PULL_REQUEST_FILE_PATH,
-        deletePath: null,
         localPath: `${basePath}/${PULL_REQUEST_FILE_PATH}`,
-        commitMsg: "docs: Add pull request template",
       },
     };
   }
 
+  getDeleteTargets() {
+    return [FEATURE_MD_FILE_PATH, BUG_MD_FILE_PATH, REFACTORING_MD_FILE_PATH];
+  }
+
   getPRBodyByLang() {
-    const intro =
-      this.lang === 1
-        ? "이 PR은 다음과 같은 GitHub 템플릿을 추가합니다:"
-        : "This PR adds GitHub Issues and PR template including:";
+    const basePath = this.lang === 1 ? "src/templates/ko" : "src/templates/en";
 
-    const footer =
-      this.lang === 1
-        ? "\n\n---\n\n이 PR은 [jhssong/github-template](https://github.com/jhssong/github-template)에 의해 생성되었습니다."
-        : "\n\n---\n\nThis PR was generated by [jhssong/github-template](https://github.com/jhssong/github-template).";
+    const filePath = path.resolve(`${basePath}/pr-body.md`);
 
-    return `${intro}\n\n- Issue template config\n- Feature request template\n- Bug report template\n- Pull request template${footer}`;
+    try {
+      return fs.readFileSync(filePath, "utf8");
+    } catch (error) {
+      throw createError(
+        "TemplateWorker",
+        `Failed to read PR body file: ${filePath}`,
+        error,
+      );
+    }
   }
 
   async run() {
     try {
       const templates = this.getTemplateFilesByLang(this.lang);
 
-      // Create branch if not exists
+      // Ensure branch exists
+      let branchRef;
       try {
-        await this.getBranchSHA(PR_BRANCH);
-        console.log(`ℹ️  Branch ${PR_BRANCH} already exists.`);
+        branchRef = await this.getBranchRef(PR_BRANCH);
       } catch {
-        const baseSha = await this.getBranchSHA(MAIN_BRANCH);
-        await this.createBranch(PR_BRANCH, baseSha);
-        console.log(`✅ Create new branch: ${PR_BRANCH}`);
+        const mainRef = await this.getBranchRef(MAIN_BRANCH);
+        await this.createBranch(PR_BRANCH, mainRef.object.sha);
+        branchRef = await this.getBranchRef(PR_BRANCH);
       }
 
-      for (const key of Object.keys(templates)) {
-        const { filePath, localPath, deletePath, commitMsg } = templates[key];
+      const latestCommitSha = branchRef.object.sha;
+      const commitData = await this.getCommit(latestCommitSha);
+      const baseTreeSha = commitData.tree.sha;
 
-        // Remove old version issue templates
-        await this.deleteFileIfExists(deletePath, PR_BRANCH);
+      const treeItems = [];
 
-        // Upload new templates
-        const fileContent = fs.readFileSync(path.resolve(localPath), "utf8");
-        const sha = await this.getFileSHA(filePath, PR_BRANCH);
-
-        await this.uploadFile({
-          content: fileContent,
+      // Delete existing GitHub Templates
+      for (const filePath of this.getDeleteTargets()) {
+        treeItems.push({
           path: filePath,
-          branch: PR_BRANCH,
-          message: commitMsg,
-          sha,
+          mode: "100644",
+          type: "blob",
+          sha: null,
         });
       }
-      console.log(`✅ File uploaded to ${PR_BRANCH}.`);
 
-      // Check if pr exists
+      // Update GitHub Templates
+      for (const key of Object.keys(templates)) {
+        const { filePath, localPath } = templates[key];
+        const content = fs.readFileSync(path.resolve(localPath), "utf8");
+        const blobSha = await this.createBlob(content);
+
+        treeItems.push({
+          path: filePath,
+          mode: "100644",
+          type: "blob",
+          sha: blobSha,
+        });
+      }
+
+      const newTreeSha = await this.createTree(baseTreeSha, treeItems);
+
+      const newCommitSha = await this.createCommit(
+        COMMIT_MSG,
+        newTreeSha,
+        latestCommitSha,
+      );
+
+      await this.updateRef(PR_BRANCH, newCommitSha);
+
+      console.log("✅ All templates committed.");
+
       const res = await this.api.get(
-        `/repos/${this.owner}/${this.repo}/pulls?head=${this.owner}:${PR_BRANCH}&state=open`
+        `/repos/${this.owner}/${this.repo}/pulls?head=${this.owner}:${PR_BRANCH}&state=open`,
       );
 
       if (res.data.length === 0) {
-        await this.createPullRequest({
-          branch: PR_BRANCH,
-          base: MAIN_BRANCH,
+        await this.api.post(`/repos/${this.owner}/${this.repo}/pulls`, {
           title: PR_TITLE,
+          head: PR_BRANCH,
+          base: MAIN_BRANCH,
           body: this.getPRBodyByLang(),
         });
         console.log("✅ Pull request created.");
-      } else {
-        console.log("ℹ️  Pull request already exists.");
       }
     } catch (error) {
       throw createError("TemplateWorker", error.message, error);
