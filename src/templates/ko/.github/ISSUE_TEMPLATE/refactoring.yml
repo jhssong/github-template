@@ -1,6 +1,6 @@
-name: ♻️ 리팩토링
+name: 🔨 리팩토링
 description: 코드 구조 개선, 중복 제거, 가독성 향상 등 리팩토링 작업을 제안해 주세요.
-labels: ["♻️ 리팩토링"]
+labels: ["🔨 리팩토링"]
 body:
   - type: textarea
     id: purpose
