@@ -1,21 +1,24 @@
-## 🔗 관련 이슈
+## 🔗 Related Issues
 
 
 
-## 🔧 작업 내용
+## 🔧 Work Done
 
 
 
-## 📋 리뷰 참고사항 
+
+## 📋 Review Notes
 
 
 
-## 📸 스크린샷
+
+## 📸 Screenshots
 
 
 
-## ✅ 체크리스트
 
-- [ ] 로컬 환경에서 정상적으로 동작하나요?
-- [ ] 불필요한 코드를 정리하였나요? (주석, print 함수 등)
-- [ ] PR 타이틀과 커밋 메시지가 컨벤션을 따르고 있나요?
+## ✅ Checklist
+
+- [ ] Does it work correctly in the local environment?
+- [ ] Have unnecessary codes been cleaned up? (e.g., comments, print functions)
+- [ ] Does the pr title and commit message follow the convention?

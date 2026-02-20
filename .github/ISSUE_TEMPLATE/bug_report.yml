@@ -1,43 +1,43 @@
-name: 버그 리포트
-description: 프로젝트의 문제를 신고하여 버그를 수정하고 개선하는 데 도움을 주세요.
-labels: ["🐞 버그 수정"]
+name: Bug Report
+description: Report a bug to help us fix and improve the project.
+labels: ["🐞 BugFix"]
 body:
   - type: textarea
-    id: problem
+    id: current
     attributes:
-      label: ⚠️ 문제 상황
-      description: 발생한 문제를 설명하고, 오류 메시지 또는 예상치 못한 동작을 포함해 주세요.
-      placeholder: 현재 상황을 설명해 주세요.
+      label: ⚠️ Current Behavior
+      description: Describe the bug you've encountered, including any error messages or unexpected behavior.
+      placeholder: Describe the current situation.
     validations:
       required: true
 
   - type: textarea
     id: expected
     attributes:
-      label: ✅ 예상 동작
-      description: 기대했던 동작을 설명해 주세요.
-      placeholder: 기대했던 결과를 알려 주세요.
+      label: ✅ Expected Behavior
+      description: Describe what you expected to happen.
+      placeholder: Describe the expected result.
     validations:
       required: true
 
   - type: textarea
     id: reproduce
     attributes:
-      label: ✍️ 재연 방법
-      description: 문제를 재연할 수 있는 단계를 상세히 설명해 주세요.
+      label: ✍️ Steps to Reproduce
+      description: Provide detailed steps to reproduce the bug.
       placeholder: |
-        1. 이 환경에서...
-        2. 이 설정으로...
-        3. '...' 명령 실행...
-        4. 오류 발생...
+        1. In this environment...
+        2. With these settings...
+        3. Run the '...' command...
+        4. An error occurs...
     validations:
       required: true
 
   - type: textarea
     id: logs
     attributes:
-      label: 💾 관련 로그
-      description: 관련된 로그 출력을 복사하여 붙여넣어 주세요. 자동으로 코드 형식으로 표시됩니다.
+      label: 💾 Relevant Logs
+      description: Copy and paste any relevant log output. It will be automatically formatted as code.
       render: shell
     validations:
       required: false
@@ -45,16 +45,16 @@ body:
   - type: textarea
     id: additional-context
     attributes:
-      label: 📋 참고 자료
-      description: 관련 링크나 참고할 수 있는 내용이 있다면 추가해 주세요.
-      placeholder: 관련 토론, 문서 링크 또는 유용한 자료를 포함해 주세요.
+      label: 📋 Additional Context
+      description: Add any related links or relevant information.
+      placeholder: Include links to relevant discussions, documentation, or useful resources.
     validations:
       required: false
 
   - type: checkboxes
     id: checklist
     attributes:
-      label: ✅ 체크리스트
+      label: ✅ Checklist
       options:
-        - label: 이 이슈에 적절한 라벨을 추가했습니다.
+        - label: I have added the appropriate labels to this issue.
           required: true
