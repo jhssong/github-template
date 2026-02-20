@@ -1,0 +1,44 @@
+name: ♻️ 리팩토링
+description: 코드 구조 개선, 중복 제거, 가독성 향상 등 리팩토링 작업을 제안해 주세요.
+labels: ["♻️ 리팩토링"]
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 🎯 목적
+      description: 이번 리팩토링의 목적을 작성해 주세요. (기술 부채 해소, 가독성 개선, 구조 개선 등)
+      placeholder: |
+        - 가독성 개선
+        - 중복 코드 제거
+        - 테스트 용이성 개선
+    validations:
+      required: true
+
+  - type: textarea
+    id: improvement
+    attributes:
+      label: ✅ 개선 방향
+      description: 어떤 방향으로 리팩토링할 예정인지 작성해 주세요.
+      placeholder: |
+        - 메서드 분리
+        - 공통 모듈 추출
+        - 디자인 패턴 적용
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📋 참고 자료
+      description: 관련 링크나 참고할 수 있는 내용이 있다면 추가해 주세요.
+      placeholder: 관련 토론, 문서 링크 또는 유용한 자료를 포함해 주세요.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ 체크리스트
+      options:
+        - label: 이 이슈에 적절한 라벨을 추가했습니다.
+          required: true
