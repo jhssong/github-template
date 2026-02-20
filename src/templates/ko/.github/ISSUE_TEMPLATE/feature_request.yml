@@ -27,7 +27,7 @@ body:
     id: additional-context
     attributes:
       label: 📋 참고 자료
-      description: 이 기능 요청과 관련된 추가 정보, 링크 또는 참고 자료를 제공해 주세요.
+      description: 관련 링크나 참고할 수 있는 내용이 있다면 추가해 주세요.
       placeholder: 관련 토론, 문서 링크 또는 유용한 자료를 포함해 주세요.
     validations:
       required: false

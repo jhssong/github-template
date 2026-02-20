@@ -27,7 +27,7 @@ body:
     id: additional-context
     attributes:
       label: 📋 Additional Context
-      description: Provide any additional information, links, or resources related to this feature request.
+      description: Add any related links or relevant information.
       placeholder: Include links to relevant discussions, documentation, or useful resources.
     validations:
       required: false
