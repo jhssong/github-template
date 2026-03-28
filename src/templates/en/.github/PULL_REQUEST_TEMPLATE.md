@@ -6,14 +6,7 @@
 
 
 
-
 ## 📋 Review Notes
-
-
-
-
-## 📸 Screenshots
-
 
 
 
