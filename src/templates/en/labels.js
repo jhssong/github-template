@@ -15,7 +15,7 @@ const labels = [
     description: "New features and improvements.",
   },
   {
-    name: "🔨 Refactor",
+    name: "Refactor",
     color: "f29a4e",
     description: "Code refactoring.",
   },

@@ -15,7 +15,7 @@ const labels = [
     description: "새로운 기능 및 개선 사항",
   },
   {
-    name: "🔨 리팩토링",
+    name: "리팩토링",
     color: "f29a4e",
     description: "코드 리팩토링",
   },

@@ -1,6 +1,6 @@
-name: 🔨 Refactor
+name: Refactor
 description: Propose improvements to code structure, remove duplication, or enhance readability.
-labels: ["🔨 Refactor"]
+labels: ["Refactor"]
 body:
   - type: textarea
     id: purpose
