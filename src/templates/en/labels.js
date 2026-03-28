@@ -15,7 +15,7 @@ const labels = [
     description: "New features and improvements.",
   },
   {
-    name: "Refactor",
+    name: "🔨 Refactor",
     color: "f29a4e",
     description: "Code refactoring.",
   },
@@ -33,6 +33,21 @@ const labels = [
     name: "🔵 Low Priority",
     color: "0075ca",
     description: "Low priority.",
+  },
+  {
+    name: "💬 Ask",
+    color: "d73a4a",
+    description: "Standard PR requiring review and feedback",
+  },
+  {
+    name: "🚀 Ship",
+    color: "e4e669",
+    description: "Ready to merge immediately without review",
+  },
+  {
+    name: "👀 Show",
+    color: "0075ca",
+    description: "For information sharing and light review",
   },
 ];
 

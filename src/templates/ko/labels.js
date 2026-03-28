@@ -15,7 +15,7 @@ const labels = [
     description: "새로운 기능 및 개선 사항",
   },
   {
-    name: "리팩토링",
+    name: "🔨 리팩토링",
     color: "f29a4e",
     description: "코드 리팩토링",
   },
@@ -33,6 +33,21 @@ const labels = [
     name: "🔵 낮음",
     color: "0075ca",
     description: "우선 순위 낮음",
+  },
+  {
+    name: "💬 Ask",
+    color: "d73a4a",
+    description: "일반적인 PR 패턴",
+  },
+  {
+    name: "🚀 Ship",
+    color: "e4e669",
+    description: "리뷰 없이 즉시 병합 가능한 PR",
+  },
+  {
+    name: "👀 Show",
+    color: "0075ca",
+    description: "가볍게 확인하고 넘길 수 있는 PR",
   },
 ];
 
